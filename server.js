@@ -60,6 +60,20 @@ app.route("/api/notes")
         res.json(newNote);
     });
 
+app.delete('/api/notes/:id', (req, res) =>{
+    let jsonFilePath = path.join(__dirname, '/db/db.json');
+    for(let i = 0; i < database.length; i++){
+        if(database[i].id == req.params.id){
+            database.splice(i , 1);
+            break;
+        }
+    }
+    fs.writeFileSync(jsonFilePath, JSON.stringify(database), (err)=>{
+        if (err) throw err;
+        else {console.log("Your note was deleted");}
+    });
+    res.json(database);
+});
 
 //PORT Listener
 app.listen(PORT, () => {
