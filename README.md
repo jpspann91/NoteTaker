@@ -21,7 +21,7 @@ An App that can be used to write save and delete notes weith using express to re
 
 
 ## Installation
-npm install to get `express module`. 
+`npm install` to get express module. 
 
 ## Usage
 This app will be used to show competancy with using Express.js to establish routes to different endpoints and showing different pages depeneing on the end point you have hit
