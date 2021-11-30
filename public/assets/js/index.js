@@ -3,7 +3,7 @@ let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
-
+//If on correct end point then set variables to element on the page
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
@@ -25,6 +25,7 @@ const hide = (elem) => {
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
+//get notes function to see the notes sends a fetch to /api/notes end point
 const getNotes = () =>
   fetch('/api/notes', {
     method: 'GET',
@@ -32,7 +33,7 @@ const getNotes = () =>
       'Content-Type': 'application/json',
     },
   });
-
+//function to save notes to the page sends a fetch to /api/notes end point
 const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
@@ -41,7 +42,7 @@ const saveNote = (note) =>
     },
     body: JSON.stringify(note),
   });
-
+//function to delete a note sends a fetch to /api/notes end point with id parameter entered in
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
@@ -50,6 +51,7 @@ const deleteNote = (id) =>
     },
   });
 
+//Loads notes on the screen
 const renderActiveNote = () => {
   hide(saveNoteBtn);
 
@@ -66,12 +68,18 @@ const renderActiveNote = () => {
   }
 };
 
+//Method to handle saving notes
 const handleNoteSave = () => {
+  //Create new note object
   const newNote = {
+    //title property
     title: noteTitle.value,
+    //text property
     text: noteText.value,
   };
+  //Call saveNote promise pass in new note object
   saveNote(newNote).then(() => {
+    //then once resolved call get and render notes method as well as render active note method
     getAndRenderNotes();
     renderActiveNote();
   });
@@ -83,6 +91,7 @@ const handleNoteDelete = (e) => {
   e.stopPropagation();
 
   const note = e.target;
+
   const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
 
   if (activeNote.id === noteId) {
@@ -172,7 +181,7 @@ const renderNoteList = async (notes) => {
 
 // Gets notes from the db and renders them to the sidebar
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
-
+//add event listeners if end point matches
 if (window.location.pathname === '/notes') {
   saveNoteBtn.addEventListener('click', handleNoteSave);
   newNoteBtn.addEventListener('click', handleNewNoteView);
