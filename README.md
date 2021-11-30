@@ -30,7 +30,11 @@ This app will be used to show competancy with using Express.js to establish rout
 Author: Joseph Spann. 
 
 ## Test
-No text information applicable
+Live Deployment through Heroku located here:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://lit-harbor-02490.herokuapp.com/)
+
+
 
 ## License
 [License Information Found Here](https://choosealicense.com/licenses/mit/)
